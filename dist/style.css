@@ -128,67 +128,12 @@ h1 {
   opacity: 0.3;
   border-radius: 100%;
 }
-.card .card-body .todo .todo-footer {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 1.0625rem;
-  background-color: var(--Very-Dark-Desaturated-Blue);
-  border-radius: 0.3125rem;
+.card .card-body .todo-wrapper .todo {
+  max-height: 18.75rem;
+  overflow: hidden;
+  overflow-y: scroll;
 }
-.card .card-body .todo .todo-footer .todo-track {
-  padding: 0.9375em;
-}
-.card .card-body .todo .todo-footer .todo-track ul {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-direction: row;
-  gap: 0.9375em;
-}
-.card .card-body .todo .todo-footer .todo-track ul li {
-  list-style: none;
-  font-weight: 400;
-  color: hsl(235deg, 19%, 35%);
-  font-size: 0.9375rem;
-  cursor: pointer;
-}
-.card .card-body .todo .todo-footer .todo-track ul li:hover {
-  color: hsl(0deg, 0%, 98%);
-  transition: 0.5s ease;
-}
-.card .card-body .todo .todo-footer .todo-track ul li.focus {
-  color: hsl(220deg, 98%, 61%);
-}
-.card .card-body .todo .todo-footer .in-common {
-  display: none;
-  cursor: pointer;
-}
-.card .card-body .todo .mobile-component {
-  margin-bottom: 0.625em;
-  background-color: var(--Very-Dark-Desaturated-Blue);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.9375em;
-  font-size: 0.9375rem;
-  cursor: pointer;
-  color: hsl(235deg, 19%, 35%);
-  border-bottom-left-radius: 0.3125rem;
-  border-bottom-right-radius: 0.3125rem;
-}
-.card .card-body .todo .mobile-component .clear-Completed {
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-.card .card-body .todo .mobile-component .clear-Completed:hover {
-  color: hsl(233deg, 11%, 84%);
-}
-.card .card-body .todo .todo-items .item {
+.card .card-body .todo-wrapper .todo .todo-items .item {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -199,7 +144,7 @@ h1 {
   padding-left: 1.25rem;
   position: relative;
 }
-.card .card-body .todo .todo-items .item::before {
+.card .card-body .todo-wrapper .todo .todo-items .item::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -209,11 +154,11 @@ h1 {
   background-color: hsl(235deg, 19%, 35%);
   opacity: 0.5;
 }
-.card .card-body .todo .todo-items .item .task {
+.card .card-body .todo-wrapper .todo .todo-items .item .task {
   color: hsl(233deg, 11%, 84%);
   font-size: 1rem;
 }
-.card .card-body .todo .todo-items .item .button {
+.card .card-body .todo-wrapper .todo .todo-items .item .button {
   aspect-ratio: 1;
   display: flex;
   align-items: center;
@@ -229,17 +174,77 @@ h1 {
   border: 0.0625rem solid hsl(236deg, 9%, 61%);
   border-radius: 100%;
 }
-.card .card-body .todo .todo-items .item .button .check {
+.card .card-body .todo-wrapper .todo .todo-items .item .button .check {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease;
 }
-.card .card-body .todo .todo-items .item .bg {
+.card .card-body .todo-wrapper .todo .todo-items .item .bg {
   background: linear-gradient(hsl(192deg, 100%, 67%), hsl(280deg, 87%, 65%));
   opacity: unset;
 }
-.card .card-body .todo .todo-items .item .mark {
+.card .card-body .todo-wrapper .todo .todo-items .item .mark {
   margin-left: auto;
+  cursor: pointer;
+}
+.card .card-body .todo-wrapper .mobile-component {
+  margin-bottom: 0.625em;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.9375em;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  color: hsl(235deg, 19%, 35%);
+  border-bottom-left-radius: 0.3125rem;
+  border-bottom-right-radius: 0.3125rem;
+}
+.card .card-body .todo-wrapper .mobile-component .clear-Completed {
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.card .card-body .todo-wrapper .mobile-component .clear-Completed:hover {
+  color: hsl(233deg, 11%, 84%);
+}
+.card .card-body .todo-wrapper .todo-footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 1.0625rem;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  border-radius: 0.3125rem;
+}
+.card .card-body .todo-wrapper .todo-footer .todo-track {
+  padding: 0.9375em;
+}
+.card .card-body .todo-wrapper .todo-footer .todo-track ul {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-direction: row;
+  gap: 0.9375em;
+}
+.card .card-body .todo-wrapper .todo-footer .todo-track ul li {
+  list-style: none;
+  font-weight: 400;
+  color: hsl(235deg, 19%, 35%);
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+.card .card-body .todo-wrapper .todo-footer .todo-track ul li:hover {
+  color: hsl(0deg, 0%, 98%);
+  transition: 0.5s ease;
+}
+.card .card-body .todo-wrapper .todo-footer .todo-track ul li.focus {
+  color: hsl(220deg, 98%, 61%);
+}
+.card .card-body .todo-wrapper .todo-footer .in-common {
+  display: none;
   cursor: pointer;
 }
 

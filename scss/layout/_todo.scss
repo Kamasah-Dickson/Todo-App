@@ -73,7 +73,87 @@
 				}
 			}
 		}
-		.todo {
+		.todo-wrapper {
+			.todo {
+				max-height: u.rem(300);
+				overflow: hidden;
+				overflow-y: scroll;
+
+				.todo-items {
+					.item {
+						@include u.flex;
+						flex-direction: row;
+						justify-content: space-between;
+						background-color: var(--Very-Dark-Desaturated-Blue);
+						padding: u.rem(15);
+						padding-left: u.rem(20);
+
+						position: relative;
+						&::before {
+							content: "";
+							position: absolute;
+							bottom: 0;
+							left: 0;
+							width: 100%;
+							height: u.rem(1);
+							background-color: g.$Very-Dark-Grayish-Blue;
+							opacity: 0.5;
+						}
+						.task {
+							color: g.$Light-Grayish-Blue;
+							font-size: u.rem(16);
+						}
+						.button {
+							aspect-ratio: 1;
+							@include u.flex;
+							justify-content: center;
+							border-radius: 100%;
+							margin-right: u.em(20);
+							z-index: 2;
+							opacity: 0.3;
+							cursor: pointer;
+							width: min(u.rem(20), u.rem(20) + 1vw, u.rem(22));
+							height: u.rem(20);
+							border: u.rem(1) solid g.$Dark-Grayish-Blue;
+							border-radius: 100%;
+							.check {
+								opacity: 0;
+								visibility: hidden;
+								transition: opacity 0.4s ease;
+							}
+						}
+						.bg {
+							background: g.$Check-Background;
+							opacity: unset;
+						}
+
+						.mark {
+							margin-left: auto;
+							cursor: pointer;
+						}
+					}
+				}
+			}
+			.mobile-component {
+				margin-bottom: u.em(10);
+				background-color: var(--Very-Dark-Desaturated-Blue);
+				@include u.flex;
+				flex-direction: row;
+				justify-content: space-between;
+				padding: u.em(15);
+				font-size: u.rem(15);
+				cursor: pointer;
+				color: g.$Very-Dark-Grayish-Blue;
+				border-bottom-left-radius: u.rem(5);
+				border-bottom-right-radius: u.rem(5);
+				.clear-Completed {
+					transition: 0.3s ease;
+					cursor: pointer;
+					&:hover {
+						color: g.$Light-Grayish-Blue;
+					}
+				}
+			}
 			.todo-footer {
 				@include u.flex;
 				flex-direction: row;
@@ -107,80 +187,6 @@
 				.in-common {
 					display: none;
 					cursor: pointer;
-				}
-			}
-			.mobile-component {
-				margin-bottom: u.em(10);
-				background-color: var(--Very-Dark-Desaturated-Blue);
-				@include u.flex;
-				flex-direction: row;
-				justify-content: space-between;
-				padding: u.em(15);
-				font-size: u.rem(15);
-				cursor: pointer;
-				color: g.$Very-Dark-Grayish-Blue;
-				border-bottom-left-radius: u.rem(5);
-				border-bottom-right-radius: u.rem(5);
-				.clear-Completed {
-					transition: 0.3s ease;
-					cursor: pointer;
-					&:hover {
-						color: g.$Light-Grayish-Blue;
-					}
-				}
-			}
-			.todo-items {
-				.item {
-					@include u.flex;
-					flex-direction: row;
-					justify-content: space-between;
-					background-color: var(--Very-Dark-Desaturated-Blue);
-					padding: u.rem(15);
-					padding-left: u.rem(20);
-
-					position: relative;
-					&::before {
-						content: "";
-						position: absolute;
-						bottom: 0;
-						left: 0;
-						width: 100%;
-						height: u.rem(1);
-						background-color: g.$Very-Dark-Grayish-Blue;
-						opacity: 0.5;
-					}
-					.task {
-						color: g.$Light-Grayish-Blue;
-						font-size: u.rem(16);
-					}
-					.button {
-						aspect-ratio: 1;
-						@include u.flex;
-						justify-content: center;
-						border-radius: 100%;
-						margin-right: u.em(20);
-						z-index: 2;
-						opacity: 0.3;
-						cursor: pointer;
-						width: min(u.rem(20), u.rem(20) + 1vw, u.rem(22));
-						height: u.rem(20);
-						border: u.rem(1) solid g.$Dark-Grayish-Blue;
-						border-radius: 100%;
-						.check {
-							opacity: 0;
-							visibility: hidden;
-							transition: opacity 0.4s ease;
-						}
-					}
-					.bg {
-						background: g.$Check-Background;
-						opacity: unset;
-					}
-
-					.mark {
-						margin-left: auto;
-						cursor: pointer;
-					}
 				}
 			}
 		}
