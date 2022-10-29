@@ -1,0 +1,32 @@
+@use "../util" as u;
+@use "../global/colors" as g;
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+body {
+	font-size: 18px;
+	font-family: "Josefin Sans", sans-serif;
+	@include u.flex;
+	min-height: 100vh;
+	background-color: var(--Very-Dark-Blue);
+}
+
+picture {
+	width: 100%;
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+h1 {
+	font-size: clamp(u.rem(20), u.rem(27) + 0.5vw, u.rem(33));
+	text-transform: uppercase;
+	letter-spacing: u.rem(10);
+	font-weight: 700;
+	color: g.$Very-Light-Gray;
+}

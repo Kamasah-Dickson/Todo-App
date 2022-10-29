@@ -1,0 +1,198 @@
+@use "../util/" as u;
+@use "../global" as g;
+.banner {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.card {
+	width: min(100% - u.rem(50), u.rem(600));
+	margin-inline: auto;
+	margin-top: u.rem(-100);
+	position: relative;
+	@include u.flex;
+	align-items: stretch;
+	span {
+		color: g.$Very-Dark-Grayish-Blue;
+		text-align: center;
+		width: 100%;
+		margin-inline: auto;
+		display: block;
+		margin-top: clamp(u.em(30), u.rem(72) + 5vw, u.rem(70));
+		font-size: clamp(u.rem(9), u.rem(13) + 1vw, u.rem(15));
+		font-weight: 400;
+	}
+	.card-header {
+		@include u.flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-bottom: u.rem(30);
+		.toggle {
+			width: u.rem(20);
+			cursor: pointer;
+		}
+	}
+	.card-body {
+		.input {
+			width: 100%;
+			display: block;
+			margin-bottom: u.em(15);
+			label {
+				position: relative;
+				input {
+					width: 100%;
+					background-color: var(--Very-Dark-Desaturated-Blue);
+					color: g.$Bright-Blue;
+					font-weight: 400;
+					font-size: u.rem(16);
+					height: u.rem(50);
+					border: none;
+					border-radius: u.rem(5);
+					padding-left: u.rem(50);
+					caret-color: g.$Dark-Grayish-Blue;
+					&::placeholder {
+						color: g.$Dark-Grayish-Blue;
+						font-family: "Josefin Sans", sans-serif;
+					}
+					&:focus {
+						outline: u.rem(1) solid g.$Bright-Blue;
+					}
+				}
+				.placeholder {
+					position: absolute;
+					top: 0;
+					left: 0;
+					margin-left: u.rem(20);
+					.div {
+						width: min(u.rem(20), u.rem(20) + 1vw, u.rem(22));
+						aspect-ratio: 1;
+						border: u.rem(1) solid g.$Dark-Grayish-Blue;
+						opacity: 0.3;
+						border-radius: 100%;
+					}
+				}
+			}
+		}
+		.todo {
+			.todo-footer {
+				@include u.flex;
+				flex-direction: row;
+				justify-content: center;
+				font-size: u.rem(17);
+				background-color: var(--Very-Dark-Desaturated-Blue);
+				border-radius: u.rem(5);
+
+				.todo-track {
+					padding: u.em(15);
+					ul {
+						@include u.flex;
+						flex-direction: row;
+						gap: u.em(15);
+						li {
+							list-style: none;
+							font-weight: 400;
+							color: g.$Very-Dark-Grayish-Blue;
+							font-size: u.rem(15);
+							cursor: pointer;
+							&:hover {
+								color: g.$Very-Light-Gray;
+								transition: 0.5s ease;
+							}
+							&.focus {
+								color: g.$Bright-Blue;
+							}
+						}
+					}
+				}
+				.in-common {
+					display: none;
+					cursor: pointer;
+				}
+			}
+			.mobile-component {
+				margin-bottom: u.em(10);
+				background-color: var(--Very-Dark-Desaturated-Blue);
+				@include u.flex;
+				flex-direction: row;
+				justify-content: space-between;
+				padding: u.em(15);
+				font-size: u.rem(15);
+				cursor: pointer;
+				color: g.$Very-Dark-Grayish-Blue;
+				border-bottom-left-radius: u.rem(5);
+				border-bottom-right-radius: u.rem(5);
+				.clear-Completed {
+					transition: 0.3s ease;
+					cursor: pointer;
+					&:hover {
+						color: g.$Light-Grayish-Blue;
+					}
+				}
+			}
+			.todo-items {
+				.item {
+					@include u.flex;
+					flex-direction: row;
+					justify-content: space-between;
+					background-color: var(--Very-Dark-Desaturated-Blue);
+					padding: u.rem(15);
+					padding-left: u.rem(20);
+
+					position: relative;
+					&::before {
+						content: "";
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 100%;
+						height: u.rem(1);
+						background-color: g.$Very-Dark-Grayish-Blue;
+						opacity: 0.5;
+					}
+					.task {
+						color: g.$Light-Grayish-Blue;
+						font-size: u.rem(16);
+					}
+					.button {
+						aspect-ratio: 1;
+						@include u.flex;
+						justify-content: center;
+						border-radius: 100%;
+						margin-right: u.em(20);
+						z-index: 2;
+						opacity: 0.3;
+						cursor: pointer;
+						width: min(u.rem(20), u.rem(20) + 1vw, u.rem(22));
+						height: u.rem(20);
+						border: u.rem(1) solid g.$Dark-Grayish-Blue;
+						border-radius: 100%;
+						.check {
+							opacity: 0;
+							visibility: hidden;
+							transition: opacity 0.4s ease;
+						}
+					}
+					.bg {
+						background: g.$Check-Background;
+						opacity: unset;
+					}
+
+					.mark {
+						margin-left: auto;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+}
+
+.alert-user {
+	background-color: rgba(17, 57, 235, 0.575);
+	color: g.$Very-Light-Gray;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: u.rem(200);
+}
