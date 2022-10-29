@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- displays site properly based on user's device -->
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./images/favicon-32x32.png"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="./dist/js/app.js" defer></script>
+		<link rel="stylesheet" href="./dist/style.css" />
+		<title>Frontend Mentor | Todo app</title>
+	</head>
+	<body>
+		<div class="banner" aria-hidden="true">
+			<picture>
+				<source
+					srcset="./images/bg-mobile-dark.jpg"
+					media="(max-width:530px)"
+				/>
+				<source
+					srcset="./images/bg-desktop-dark.jpg"
+					media="(min-width:530px)"
+				/>
+				<img src="./images/bg-mobile-dark.jpg" alt="" />
+			</picture>
+		</div>
+		<div class="card">
+			<div class="card-header">
+				<h1>Todo</h1>
+				<img src="./images/icon-sun.svg" alt="light mode" class="toggle" />
+			</div>
+			<div class="card-body">
+				<div class="input">
+					<label for="input">
+						<input type="text" id="input" placeholder="Create a new todo..." />
+						<div class="placeholder">
+							<div class="div"></div>
+						</div>
+					</label>
+				</div>
+				<div class="todo">
+					<div class="todo-items">
+						<div class="item">
+							<div class="button">
+								<img src="./images/icon-check.svg" alt="check" class="check" />
+							</div>
+							<!-- <p class="task">Jog around the park 5x</p>
+							<img class="mark" src="./images/icon-cross.svg" alt="mark" /> -->
+						</div>
+					</div>
+					<div class="mobile-component">
+						<div class="items in-common">2 items left</div>
+						<p class="clear-Completed in-common">Clear Completed</p>
+					</div>
+					<div class="todo-footer">
+						<div class="items in-common">2 items left</div>
+						<div class="todo-track">
+							<ul>
+								<li class="all focus">All</li>
+								<li class="active">Active</li>
+								<li class="completed">Completed</li>
+							</ul>
+						</div>
+						<p class="clear-Completed in-common">Clear Completed</p>
+					</div>
+				</div>
+			</div>
+			<span>Drag and drop to reorder</span>
+		</div>
+		<div class="alert-user">
+			<p>Your Todo is longer, minimize your words.</p>
+		</div>
+		<!-- Add dynamic number -->
+		items left list
+
+		<!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div> -->
+	</body>
+</html>
