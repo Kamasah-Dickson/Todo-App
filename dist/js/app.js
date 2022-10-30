@@ -2,14 +2,12 @@ const input = document.querySelector("input");
 const todoContainer = document.querySelector(".todo");
 const removeTodo = document.querySelector(".mark");
 const remaining = document.querySelector(".items");
+const mobileComponent = document.querySelector(".mobile-component");
+const clearAll = document.querySelector(".clear-Completed");
 const trackProgress = Array.from(document.querySelectorAll(".progress"));
 const todoText = input;
 const completed = [];
-
-//all,active,completed
-const trackActive = [];
-const trackCompleted = [];
-const trackAll = [];
+const ongoing = [];
 
 // window.addEventListener("DOMContentLoaded", () => {
 //     let me = localStorage.getItem(completed);
@@ -25,10 +23,9 @@ const trackAll = [];
 // 	return (remaining.textContent = `${
 // 		todoContainer.children.length + i
 // 	} items left`);
+// function counter() {
+// 	return (remaining.textContent = `${todoContainer.children.length} items left`);
 // }
-function counter() {
-	return (remaining.textContent = `${completed.length} items left`);
-}
 
 // add the active color to each element recieving the click;
 
@@ -42,8 +39,9 @@ trackProgress.forEach((track, index) => {
 	});
 });
 
+mobileComponent.style.display = "none";
+
 input.addEventListener("keydown", (e) => {
-	counter();
 	if (input.value === "") {
 		return;
 	}
@@ -51,6 +49,9 @@ input.addEventListener("keydown", (e) => {
 		const todoItemContainer = document.createElement("div");
 		todoItemContainer.className = "todo-items";
 		todoContainer.prepend(todoItemContainer);
+		mobileComponent.style.display = "flex";
+		ongoing.push(todoItemContainer);
+		updateCounter();
 
 		trackProgress.forEach((filter) => {
 			filter.addEventListener("click", (e) => {
@@ -96,7 +97,6 @@ input.addEventListener("keydown", (e) => {
 		items.appendChild(removeTodo);
 		//enentListener for check toggle
 		items.addEventListener("click", () => {
-			imageCheck.style.opacity = "1";
 			btnCheck.classList.toggle("bg");
 			imageCheck.classList.toggle("check");
 			//apply the line-through to completed tasks
@@ -105,22 +105,61 @@ input.addEventListener("keydown", (e) => {
 				//track completed
 				todoItemContainer.classList.add("completed");
 				todoItemContainer.classList.remove("todo-items");
+
 				completed.push(todoItemContainer);
-				counter();
+				updateCounter();
 			} else {
 				btnCheck.nextElementSibling.classList.remove("line-through");
 
 				//remove completed array if modified by user;
 				todoItemContainer.classList.remove("completed");
 				todoItemContainer.classList.add("todo-items");
-				remaining.textContent = `${todoContainer.children.length} items left`;
 
 				completed.pop(todoItemContainer);
+				updateCounter();
 				//remove completed tag if unchecked
 				todoItemContainer.classList.remove("completed");
-				// counter();
 			}
 		});
 		input.value = "";
+
+		// function addCount() {
+		// }
 	}
 });
+
+// function addCount() {
+// }
+
+function updateCounter() {
+	return (remaining.textContent = `${
+		todoContainer.children.length - completed.length
+	} items left`);
+}
+// function addCount() {
+// 	return (remaining.textContent = `${ongoing.length} items left`);
+// }
+
+// function addCount() {
+// 	let mapList = Array.from(todoContainer.children);
+// 	mapList.filter((current) => {
+// 		current.className === "todo-items";
+// 		console.log(current);
+// 	});
+
+// 	console.log(mapList);
+// 	// if (current.classList.contains("todo-items")) {
+// 	// 	console.log(current.length);
+// 	// 	// return (remaining.textContent = `${.children.length} items left`);
+// 	// }
+// }
+
+// function removeCount() {
+// 	let initial = Array.from(todoContainer.children);
+// 	const completedTodo = [...initial];
+// 	completedTodo.forEach((todo, index) => {
+// 		completedTodo.splice(index, 1);
+// 		remaining.textContent = `${completedTodo.length} items left`;
+// 	});
+// 	console.log(completedTodo);
+// }
