@@ -8,10 +8,12 @@
 .card {
 	width: min(100% - u.rem(50), u.rem(600));
 	margin-inline: auto;
-	margin-top: u.rem(-100);
+	margin-top: u.rem(-180);
 	position: relative;
 	@include u.flex;
 	align-items: stretch;
+	-webkit-user-select: none;
+	user-select: none;
 	span {
 		color: g.$Very-Dark-Grayish-Blue;
 		text-align: center;
@@ -75,11 +77,26 @@
 		}
 		.todo-wrapper {
 			.todo {
-				max-height: u.rem(300);
+				max-height: u.rem(250);
 				overflow: hidden;
 				overflow-y: scroll;
 
-				.todo-items {
+				&::-webkit-scrollbar {
+					background: var(--Very-Dark-Desaturated-Blue);
+					width: u.rem(2);
+				}
+				&::-webkit-scrollbar-track {
+					box-shadow: inset 0 0 u.rem(6) rgba(0, 0, 0, 0.3);
+					height: auto;
+				}
+				&::-webkit-scrollbar-thumb {
+					background: g.$Check-Background;
+					outline: u.rem(3) solid var(--Very-Dark-Desaturated-Blue);
+					border-radius: u.rem(20);
+					width: u.rem(5);
+				}
+				.todo-items,
+				.completed {
 					.item {
 						@include u.flex;
 						flex-direction: row;
@@ -102,6 +119,11 @@
 						.task {
 							color: g.$Light-Grayish-Blue;
 							font-size: u.rem(16);
+							transition: color 0.4s ease;
+						}
+						.line-through {
+							text-decoration: line-through;
+							color: g.$Very-Dark-Grayish-Blue;
 						}
 						.button {
 							aspect-ratio: 1;
@@ -121,10 +143,15 @@
 								visibility: hidden;
 								transition: opacity 0.4s ease;
 							}
+							.show-check {
+								visibility: visible;
+								opacity: 1;
+							}
 						}
 						.bg {
 							background: g.$Check-Background;
 							opacity: unset;
+							border: none;
 						}
 
 						.mark {
@@ -132,6 +159,12 @@
 							cursor: pointer;
 						}
 					}
+				}
+				.removeItem.todo-items {
+					display: none;
+				}
+				.show-active.completed {
+					display: none;
 				}
 			}
 			.mobile-component {
@@ -168,19 +201,23 @@
 						@include u.flex;
 						flex-direction: row;
 						gap: u.em(15);
+						font-weight: 700;
 						li {
-							list-style: none;
-							font-weight: 400;
-							color: g.$Very-Dark-Grayish-Blue;
-							font-size: u.rem(15);
-							cursor: pointer;
-							&:hover {
-								color: g.$Very-Light-Gray;
+							a {
+								font-weight: 700;
+								text-decoration: none;
+								color: g.$Very-Dark-Grayish-Blue;
+								font-size: u.rem(15);
+								cursor: pointer;
 								transition: 0.5s ease;
+								&:hover {
+									color: g.$Very-Light-Gray;
+								}
+								&.focus {
+									color: g.$Bright-Blue;
+								}
 							}
-							&.focus {
-								color: g.$Bright-Blue;
-							}
+							list-style: none;
 						}
 					}
 				}
