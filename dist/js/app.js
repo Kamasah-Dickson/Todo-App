@@ -1,34 +1,53 @@
 const input = document.querySelector("input");
 const todoContainer = document.querySelector(".todo");
-const removeTodo = document.querySelector(".mark");
 const remaining = document.querySelector(".items");
+const toggle = document.querySelector(".toggle");
 const mobileComponent = document.querySelector(".mobile-component");
 const clearAll = document.querySelector(".clear-Completed");
 const trackProgress = Array.from(document.querySelectorAll(".progress"));
 const todoText = input;
+let theTheme = localStorage.getItem("Theme");
+
+window.addEventListener("DOMContentLoaded", () => {
+	getTodos();
+	//theme
+	let theme = localStorage.getItem("Theme");
+	document.body.classList.value = theme;
+});
+
+//theme
+
+toggle.addEventListener("click", () => {
+	if (document.body.classList.contains("dark-theme")) {
+		lightTheme();
+	} else {
+		darkTheme();
+	}
+});
+
+function lightTheme() {
+	document.body.classList.remove("dark-theme");
+	document.body.classList.add("light-theme");
+	document.body.setAttribute("data-theme", "lightMode");
+	localStorage.setItem("Theme", "light-theme");
+}
+function darkTheme() {
+	document.body.classList.add("dark-theme");
+	document.body.classList.remove("light-theme");
+	localStorage.setItem("Theme", "dark-theme");
+	document.body.setAttribute("data-theme", "darkMode");
+}
+
+// todos
 const completed = [];
 const ongoing = [];
 
-// window.addEventListener("DOMContentLoaded", () => {
-//     let me = localStorage.getItem(completed);
-// });
-//check amout of inputs entered
-// input.addEventListener("keydown", () => {
-// 	if (input.value.length === 5) {
-// 		console.log("met");
-// 	}
-// });
-// function updateCounter() {
-// 	let i = +-1;
-// 	return (remaining.textContent = `${
-// 		todoContainer.children.length + i
-// 	} items left`);
-// function counter() {
-// 	return (remaining.textContent = `${todoContainer.children.length} items left`);
-// }
-
+mobileComponent.style.display = "none";
+clearAll.style.display = "none";
+clearAll.addEventListener("click", () => {
+	///use local storage
+});
 // add the active color to each element recieving the click;
-
 trackProgress.forEach((track, index) => {
 	track.addEventListener("click", (e) => {
 		e.preventDefault();
@@ -38,8 +57,6 @@ trackProgress.forEach((track, index) => {
 		trackProgress[index].classList.add("focus");
 	});
 });
-
-mobileComponent.style.display = "none";
 
 input.addEventListener("keydown", (e) => {
 	if (input.value === "") {
@@ -95,6 +112,7 @@ input.addEventListener("keydown", (e) => {
 		removeTodo.className = "mark";
 		removeTodo.src = "./images/icon-cross.svg";
 		items.appendChild(removeTodo);
+
 		//enentListener for check toggle
 		items.addEventListener("click", () => {
 			btnCheck.classList.toggle("bg");
@@ -105,12 +123,13 @@ input.addEventListener("keydown", (e) => {
 				//track completed
 				todoItemContainer.classList.add("completed");
 				todoItemContainer.classList.remove("todo-items");
-
+				clearAll.style.display = "flex";
 				completed.push(todoItemContainer);
+
 				updateCounter();
 			} else {
 				btnCheck.nextElementSibling.classList.remove("line-through");
-
+				clearAll.style.display = "none";
 				//remove completed array if modified by user;
 				todoItemContainer.classList.remove("completed");
 				todoItemContainer.classList.add("todo-items");
@@ -122,44 +141,41 @@ input.addEventListener("keydown", (e) => {
 			}
 		});
 		input.value = "";
-
-		// function addCount() {
-		// }
 	}
 });
-
-// function addCount() {
-// }
 
 function updateCounter() {
 	return (remaining.textContent = `${
 		todoContainer.children.length - completed.length
 	} items left`);
 }
-// function addCount() {
-// 	return (remaining.textContent = `${ongoing.length} items left`);
-// }
 
-// function addCount() {
-// 	let mapList = Array.from(todoContainer.children);
-// 	mapList.filter((current) => {
-// 		current.className === "todo-items";
-// 		console.log(current);
-// 	});
+function saveLocalStorage(todo) {
+	let todos;
+	if (localStorage.getItem("todos") === null) {
+		todos = [];
+	} else {
+		todos = JSON.parse(localStorage.getItem("todos"));
+	}
+	todos.push(todo);
+	localStorage.setItem("todos", JSON.stringify(todos));
+}
 
-// 	console.log(mapList);
-// 	// if (current.classList.contains("todo-items")) {
-// 	// 	console.log(current.length);
-// 	// 	// return (remaining.textContent = `${.children.length} items left`);
-// 	// }
-// }
-
-// function removeCount() {
-// 	let initial = Array.from(todoContainer.children);
-// 	const completedTodo = [...initial];
-// 	completedTodo.forEach((todo, index) => {
-// 		completedTodo.splice(index, 1);
-// 		remaining.textContent = `${completedTodo.length} items left`;
-// 	});
-// 	console.log(completedTodo);
-// }
+function getTodos() {
+	let todos;
+	if (localStorage.getItem("todos") === null) {
+		todos = [];
+	} else {
+		todos = JSON.parse(localStorage.getItem("todos"));
+	}
+	todos.forEach((todo) => {
+		//return localStorage;
+		//return localStorage;
+		//return localStorage;
+		//return localStorage;
+		//return localStorage;
+		//return localStorage;
+		//return localStorage;
+		//return localStorage;
+	});
+}

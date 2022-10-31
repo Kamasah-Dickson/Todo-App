@@ -6,16 +6,17 @@
 	height: 100%;
 }
 .card {
-	width: min(100% - u.rem(50), u.rem(600));
+	width: min(100% - u.rem(50), u.rem(580));
 	margin-inline: auto;
 	margin-top: u.rem(-180);
 	position: relative;
+	border-radius: u.rem(5);
 	@include u.flex;
 	align-items: stretch;
 	-webkit-user-select: none;
 	user-select: none;
 	span {
-		color: g.$Very-Dark-Grayish-Blue;
+		color: var(--Very-Dark-Grayish-Blue);
 		text-align: center;
 		width: 100%;
 		margin-inline: auto;
@@ -39,25 +40,27 @@
 			width: 100%;
 			display: block;
 			margin-bottom: u.em(15);
+			box-shadow: 0 u.rem(3) u.rem(10) u.rem(-4) var(--Very-Dark-Blue);
+
 			label {
 				position: relative;
 				input {
 					width: 100%;
 					background-color: var(--Very-Dark-Desaturated-Blue);
-					color: g.$Bright-Blue;
+					color: var(--Bright-Blue);
 					font-weight: 400;
 					font-size: u.rem(16);
 					height: u.rem(50);
 					border: none;
 					border-radius: u.rem(5);
 					padding-left: u.rem(50);
-					caret-color: g.$Dark-Grayish-Blue;
+					caret-color: var(--Dark-Grayish-Blue);
 					&::placeholder {
-						color: g.$Dark-Grayish-Blue;
+						color: var(--Dark-Grayish-Blue);
 						font-family: "Josefin Sans", sans-serif;
 					}
 					&:focus {
-						outline: u.rem(1) solid g.$Bright-Blue;
+						outline: u.rem(1) solid var(--Bright-Blue);
 					}
 				}
 				.placeholder {
@@ -68,7 +71,7 @@
 					.div {
 						width: min(u.rem(20), u.rem(20) + 1vw, u.rem(22));
 						aspect-ratio: 1;
-						border: u.rem(1) solid g.$Dark-Grayish-Blue;
+						border: u.rem(1) solid var(--Dark-Grayish-Blue);
 						opacity: 0.3;
 						border-radius: 100%;
 					}
@@ -77,6 +80,7 @@
 		}
 		.todo-wrapper {
 			.todo {
+				box-shadow: u.rem(10) u.rem(3) u.rem(20) u.rem(-4) var(--Very-Dark-Blue);
 				max-height: u.rem(250);
 				overflow: hidden;
 				overflow-y: scroll;
@@ -90,13 +94,14 @@
 					height: auto;
 				}
 				&::-webkit-scrollbar-thumb {
-					background: g.$Check-Background;
+					background: var(--Check-Background);
 					outline: u.rem(3) solid var(--Very-Dark-Desaturated-Blue);
 					border-radius: u.rem(20);
 					width: u.rem(5);
 				}
 				.todo-items,
 				.completed {
+					cursor: pointer;
 					.item {
 						@include u.flex;
 						flex-direction: row;
@@ -113,17 +118,18 @@
 							left: 0;
 							width: 100%;
 							height: u.rem(1);
-							background-color: g.$Very-Dark-Grayish-Blue;
+							background-color: var(--Very-Dark-Grayish-Blue);
 							opacity: 0.5;
 						}
 						.task {
-							color: g.$Light-Grayish-Blue;
+							color: var(--Light-Grayish-Blue);
 							font-size: u.rem(16);
 							transition: color 0.4s ease;
+							cursor: pointer;
 						}
 						.line-through {
 							text-decoration: line-through;
-							color: g.$Very-Dark-Grayish-Blue;
+							color: var(--Very-Dark-Grayish-Blue);
 						}
 						.button {
 							aspect-ratio: 1;
@@ -136,7 +142,11 @@
 							cursor: pointer;
 							width: min(u.rem(20), u.rem(20) + 1vw, u.rem(22));
 							height: u.rem(20);
-							border: u.rem(1) solid g.$Dark-Grayish-Blue;
+							border: u.rem(1) solid var(--Dark-Grayish-Blue);
+							&:hover {
+								border: u.rem(1) solid var(--Check-Background);
+							}
+							//fixe the color
 							border-radius: 100%;
 							.check {
 								opacity: 0;
@@ -149,7 +159,7 @@
 							}
 						}
 						.bg {
-							background: g.$Check-Background;
+							background: var(--Check-Background);
 							opacity: unset;
 							border: none;
 						}
@@ -158,6 +168,12 @@
 							margin-left: auto;
 							cursor: pointer;
 						}
+					}
+				}
+				.todo-items {
+					&:hover {
+						transform: scale(1.02);
+						transition: transform 0.3s ease;
 					}
 				}
 				.removeItem.todo-items {
@@ -176,18 +192,19 @@
 				padding: u.em(15);
 				font-size: u.rem(15);
 				cursor: pointer;
-				color: g.$Very-Dark-Grayish-Blue;
+				color: var(--Very-Dark-Grayish-Blue);
 				border-bottom-left-radius: u.rem(5);
 				border-bottom-right-radius: u.rem(5);
 				.clear-Completed {
 					transition: 0.3s ease;
 					cursor: pointer;
 					&:hover {
-						color: g.$Light-Grayish-Blue;
+						color: var(--Light-Grayish-Blue);
 					}
 				}
 			}
 			.todo-footer {
+				box-shadow: u.rem(10) u.rem(6) u.rem(20) u.rem(-4) var(--Very-Dark-Blue);
 				@include u.flex;
 				flex-direction: row;
 				justify-content: center;
@@ -206,15 +223,15 @@
 							a {
 								font-weight: 700;
 								text-decoration: none;
-								color: g.$Very-Dark-Grayish-Blue;
+								color: var(--Very-Dark-Grayish-Blue);
 								font-size: u.rem(15);
 								cursor: pointer;
 								transition: 0.5s ease;
 								&:hover {
-									color: g.$Very-Light-Gray;
+									color: var(--Very-Light-Gray);
 								}
 								&.focus {
-									color: g.$Bright-Blue;
+									color: var(--Bright-Blue);
 								}
 							}
 							list-style: none;
@@ -232,7 +249,7 @@
 
 .alert-user {
 	background-color: rgba(17, 57, 235, 0.575);
-	color: g.$Very-Light-Gray;
+	color: var(--Very-Light-Gray);
 	text-align: center;
 	position: absolute;
 	top: 0;

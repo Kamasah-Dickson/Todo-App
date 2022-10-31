@@ -12,6 +12,7 @@ body {
 	font-family: "Josefin Sans", sans-serif;
 	@include u.flex;
 	min-height: 100vh;
+	background-color: var(--Very-Dark-Blue);
 	&::-webkit-scrollbar {
 		background: var(--Light-Grayish-Blue);
 		width: u.rem(5);
@@ -21,7 +22,7 @@ body {
 		height: auto;
 	}
 	&::-webkit-scrollbar-thumb {
-		background: g.$Check-Background;
+		background: var(--Check-Background);
 		outline: u.rem(3) solid var(--Very-Dark-Desaturated-Blue);
 		border-radius: u.rem(20);
 		width: u.rem(5);
@@ -42,5 +43,10 @@ h1 {
 	text-transform: uppercase;
 	letter-spacing: u.rem(10);
 	font-weight: 700;
-	color: g.$Very-Light-Gray;
+	color: var(--Very-Light-Gray);
+}
+
+*,
+body > * {
+	transition: 0.2s ease-in;
 }
