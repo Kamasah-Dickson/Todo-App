@@ -31,9 +31,13 @@ body {
 
 picture {
 	width: 100%;
+	height: 100%;
 	img {
 		width: 100%;
-		height: 100%;
+		height: u.rem(250);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
 		display: block;
 	}
 }
@@ -43,7 +47,7 @@ h1 {
 	text-transform: uppercase;
 	letter-spacing: u.rem(10);
 	font-weight: 700;
-	color: var(--Very-Light-Gray);
+	color: hsl(0, 0%, 98%);
 }
 
 *,

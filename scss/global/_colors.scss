@@ -3,22 +3,27 @@
 // ### Neutral
 :root {
 	--Check-Background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-	--Bright-Blue: hsl(220, 98%, 61%);
+	--Bright-Blue: hsl(235, 21%, 11%); //done
 	// ### Light Theme
-	--Very-Light-Gray: hsl(0, 0%, 98%);
-	--Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
-	--Light-Grayish-Blue: hsl(233, 11%, 84%);
-	--Dark-Grayish-Blue: hsl(236, 9%, 61%);
-	--Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+	--Bright-Blue: hsl(220, 98%, 61%); //done
+	--Very-Light-Gray: hsl(235, 21%, 11%); //done
+	--Very-Dark-Desaturated-Blue: hsl(0, 0%, 98%); //done
+	--Very-Dark-Grayish-Blue: hsl(233, 11%, 84%); //done
+	--Dark-Grayish-Blue: hsl(236, 9%, 61%); //done
+	--Light-Grayish-Blue: hsl(235, 21%, 11%); //done
+	// --Very-Dark-Blue2: hsl(234, 39%, 85%); //done
+	--Very-Dark-Blue2: hsl(233, 11%, 84%);
 }
 .dark-theme {
-	--Very-Dark-Blue: hsl(235, 21%, 11%);
-	--Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
-	--Light-Grayish-Blue: hsl(234, 39%, 85%);
-	--Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
-	--Dark-Grayish-Blue: hsl(234, 11%, 52%);
-	--Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
-	--Very-Dark-Grayish-Blue2: hsl(237, 14%, 26%);
+	--Bright-Blue: hsl(220, 98%, 61%); //done
+	--Very-Light-Gray: hsl(0, 0%, 98%); //done
+	--Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%); //done
+	--Very-Dark-Grayish-Blue: hsl(233, 14%, 35%); //done
+	--Dark-Grayish-Blue: hsl(234, 11%, 52%); //done
+	--Light-Grayish-Blue: hsl(234, 39%, 85%); //done
+	--Very-Dark-Blue: hsl(235, 21%, 11%); //done
+	--Very-Dark-Blue2: hsla(228, 24%, 4%, 0.63); //done
+	// --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
 }
 
 // ### Dark Theme

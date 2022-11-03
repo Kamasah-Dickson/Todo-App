@@ -20,24 +20,38 @@
 		<link rel="stylesheet" href="./dist/style.css" />
 		<title>Frontend Mentor | Todo app</title>
 	</head>
-	<body data-theme="true" class="light-theme">
+	<body data-theme="true" class="dark-theme">
 		<div class="banner" aria-hidden="true">
 			<picture>
 				<source
+					draggable="false"
 					srcset="./images/bg-mobile-dark.jpg"
 					media="(max-width:530px)"
+					class="theme-mobile"
 				/>
 				<source
+					draggable="false"
 					srcset="./images/bg-desktop-dark.jpg"
 					media="(min-width:530px)"
+					class="theme-desktop"
 				/>
-				<img src="./images/bg-mobile-dark.jpg" alt="" />
+				<img
+					draggable="false"
+					class="theme"
+					src="./images/bg-mobile-dark.jpg"
+					alt=""
+				/>
 			</picture>
 		</div>
 		<div class="card">
 			<div class="card-header">
 				<h1>Todo</h1>
-				<img src="./images/icon-sun.svg" alt="light mode" class="toggle" />
+				<img
+					draggable="false"
+					src="./images/icon-sun.svg"
+					alt="light mode"
+					class="toggle sun"
+				/>
 			</div>
 			<div class="card-body">
 				<div class="input">
@@ -56,19 +70,31 @@
 				<div class="todo-wrapper">
 					<div class="todo"></div>
 					<div class="mobile-component">
-						<div class="items in-common"></div>
-						<p class="clear-Completed in-common">Clear Completed</p>
+						<div class="items in-common1"></div>
+						<p class="clear-Completed in-common1">Clear Completed</p>
 					</div>
 					<div class="todo-footer">
 						<div class="items in-common"></div>
 						<div class="todo-track">
 							<ul class="filter">
-								<li><a class="all focus progress" href="#">All</a></li>
-								<li><a class="active progress" href="#">Active</a></li>
-								<li><a class="complete progress" href="#">Completed</a></li>
+								<li>
+									<a draggable="false" class="all focus progress" href="#"
+										>All</a
+									>
+								</li>
+								<li>
+									<a draggable="false" class="active progress" href="#"
+										>Active</a
+									>
+								</li>
+								<li>
+									<a draggable="false" class="complete progress" href="#"
+										>Completed</a
+									>
+								</li>
 							</ul>
 						</div>
-						<p class="clear-Completed in-common">Clear Completed</p>
+						<p class="clear-Completed in-common3">Clear Completed</p>
 					</div>
 				</div>
 			</div>

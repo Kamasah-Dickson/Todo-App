@@ -1,21 +1,24 @@
 :root {
   --Check-Background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  --Bright-Blue: hsl(235, 21%, 11%);
   --Bright-Blue: hsl(220, 98%, 61%);
-  --Very-Light-Gray: hsl(0, 0%, 98%);
-  --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
-  --Light-Grayish-Blue: hsl(233, 11%, 84%);
+  --Very-Light-Gray: hsl(235, 21%, 11%);
+  --Very-Dark-Desaturated-Blue: hsl(0, 0%, 98%);
+  --Very-Dark-Grayish-Blue: hsl(233, 11%, 84%);
   --Dark-Grayish-Blue: hsl(236, 9%, 61%);
-  --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+  --Light-Grayish-Blue: hsl(235, 21%, 11%);
+  --Very-Dark-Blue2: hsl(233, 11%, 84%);
 }
 
 .dark-theme {
-  --Very-Dark-Blue: hsl(235, 21%, 11%);
+  --Bright-Blue: hsl(220, 98%, 61%);
+  --Very-Light-Gray: hsl(0, 0%, 98%);
   --Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
-  --Light-Grayish-Blue: hsl(234, 39%, 85%);
-  --Light-Grayish-Blue-hover: hsl(236, 33%, 92%);
-  --Dark-Grayish-Blue: hsl(234, 11%, 52%);
   --Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
-  --Very-Dark-Grayish-Blue2: hsl(237, 14%, 26%);
+  --Dark-Grayish-Blue: hsl(234, 11%, 52%);
+  --Light-Grayish-Blue: hsl(234, 39%, 85%);
+  --Very-Dark-Blue: hsl(235, 21%, 11%);
+  --Very-Dark-Blue2: hsla(228, 24%, 4%, 0.63);
 }
 
 *,
@@ -52,10 +55,14 @@ body::-webkit-scrollbar-thumb {
 
 picture {
   width: 100%;
+  height: 100%;
 }
 picture img {
   width: 100%;
-  height: 100%;
+  height: 15.625rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   display: block;
 }
 
@@ -64,7 +71,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.625rem;
   font-weight: 700;
-  color: var(--Very-Light-Gray);
+  color: hsl(0deg, 0%, 98%);
 }
 
 *,
@@ -77,11 +84,16 @@ body > * {
   width: 100%;
   height: 100%;
 }
+@media (min-width: 33.125rem) {
+  .banner .theme {
+    background-image: url("../../images/bg-desktop-light.jpg");
+  }
+}
 
 .card {
   width: min(100% - 3.125rem, 36.25rem);
   margin-inline: auto;
-  margin-top: -11.25rem;
+  margin-top: -10rem;
   position: relative;
   border-radius: 0.3125rem;
   display: flex;
@@ -94,7 +106,7 @@ body > * {
        user-select: none;
 }
 .card span {
-  color: var(--Very-Dark-Grayish-Blue);
+  color: var(--Dark-Grayish-Blue);
   text-align: center;
   width: 100%;
   margin-inline: auto;
@@ -116,10 +128,10 @@ body > * {
   cursor: pointer;
 }
 .card .card-body .input {
+  box-shadow: 0 0.1875rem 0.75rem -0.3125rem var(--Very-Dark-Blue2);
   width: 100%;
   display: block;
   margin-bottom: 0.9375em;
-  box-shadow: 0 0.1875rem 0.625rem -0.25rem var(--Very-Dark-Blue);
 }
 .card .card-body .input label {
   position: relative;
@@ -164,9 +176,12 @@ body > * {
   opacity: 0.3;
   border-radius: 100%;
 }
+.card .card-body .todo-wrapper {
+  box-shadow: none;
+}
 .card .card-body .todo-wrapper .todo {
-  box-shadow: 0.625rem 0.1875rem 1.25rem -0.25rem var(--Very-Dark-Blue);
   max-height: 15.625rem;
+  background-color: var(--Very-Dark-Desaturated-Blue);
   overflow: hidden;
   overflow-y: scroll;
 }
@@ -277,19 +292,26 @@ body > * {
   display: none;
 }
 .card .card-body .todo-wrapper .mobile-component {
-  margin-bottom: 0.625em;
+  box-shadow: 0rem 0.625rem 0.625rem -0.3125rem var(--Very-Dark-Blue2);
+  margin-bottom: 1.875em;
   background-color: var(--Very-Dark-Desaturated-Blue);
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0.9375em;
+  padding: 1.25em;
   font-size: 0.9375rem;
   cursor: pointer;
-  color: var(--Very-Dark-Grayish-Blue);
+  color: var(--Dark-Grayish-Blue);
   border-bottom-left-radius: 0.3125rem;
   border-bottom-right-radius: 0.3125rem;
+}
+@media (min-width: 48rem) {
+  .card .card-body .todo-wrapper .mobile-component {
+    margin-bottom: 0em;
+    display: none !important;
+  }
 }
 .card .card-body .todo-wrapper .mobile-component .clear-Completed {
   transition: 0.3s ease;
@@ -299,7 +321,7 @@ body > * {
   color: var(--Light-Grayish-Blue);
 }
 .card .card-body .todo-wrapper .todo-footer {
-  box-shadow: 0.625rem 0.375rem 1.25rem -0.25rem var(--Very-Dark-Blue);
+  box-shadow: 0.375rem 1.25rem 0.9375rem -0.3125rem var(--Very-Dark-Blue2);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -307,10 +329,20 @@ body > * {
   justify-content: center;
   font-size: 1.0625rem;
   background-color: var(--Very-Dark-Desaturated-Blue);
-  border-radius: 0.3125rem;
+  border-radius: 0.4375rem;
+}
+@media (min-width: 48rem) {
+  .card .card-body .todo-wrapper .todo-footer {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+.card .card-body .todo-wrapper .todo-footer .in-common {
+  display: none;
+  color: var(--Dark-Grayish-Blue);
 }
 .card .card-body .todo-wrapper .todo-footer .todo-track {
-  padding: 0.9375em;
+  padding: 1.25em;
 }
 .card .card-body .todo-wrapper .todo-footer .todo-track ul {
   display: flex;
@@ -326,10 +358,14 @@ body > * {
 .card .card-body .todo-wrapper .todo-footer .todo-track ul li a {
   font-weight: 700;
   text-decoration: none;
-  color: var(--Very-Dark-Grayish-Blue);
+  color: var(--Dark-Grayish-Blue);
   font-size: 0.9375rem;
   cursor: pointer;
   transition: 0.5s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .card .card-body .todo-wrapper .todo-footer .todo-track ul li a:hover {
   color: var(--Very-Light-Gray);
@@ -337,9 +373,40 @@ body > * {
 .card .card-body .todo-wrapper .todo-footer .todo-track ul li a.focus {
   color: var(--Bright-Blue);
 }
-.card .card-body .todo-wrapper .todo-footer .in-common {
+.card .card-body .todo-wrapper .todo-footer .in-common1 {
   display: none;
   cursor: pointer;
+  color: var(--Dark-Grayish-Blue);
+  transition: 0.5s ease;
+}
+.card .card-body .todo-wrapper .todo-footer .in-common1:hover {
+  color: var(--Very-Light-Gray);
+}
+.card .card-body .todo-wrapper .todo-footer .in-common1.focus {
+  color: var(--Bright-Blue);
+}
+@media (min-width: 48rem) {
+  .card .card-body .todo-wrapper .todo-footer .in-common1 {
+    display: flex;
+  }
+}
+.card .card-body .todo-wrapper .todo-footer .in-common3 {
+  display: none;
+  color: var(--Dark-Grayish-Blue);
+  cursor: pointer;
+}
+.card .card-body .todo-wrapper .todo-footer .in-common3:hover {
+  color: var(--Very-Light-Gray);
+}
+@media (min-width: 48rem) {
+  .card .card-body .todo-wrapper .todo-footer {
+    justify-content: space-between;
+    padding-inline: 1.875rem;
+  }
+  .card .card-body .todo-wrapper .todo-footer .in-common,
+.card .card-body .todo-wrapper .todo-footer .in-common3 {
+    display: block;
+  }
 }
 
 .alert-user {
