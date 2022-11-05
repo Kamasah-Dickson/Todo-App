@@ -202,9 +202,6 @@ body > * {
 .card .card-body .todo-wrapper .todo .todo-items,
 .card .card-body .todo-wrapper .todo .completed {
   cursor: pointer;
-}
-.card .card-body .todo-wrapper .todo .todo-items .item,
-.card .card-body .todo-wrapper .todo .completed .item {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -215,8 +212,8 @@ body > * {
   padding-left: 1.25rem;
   position: relative;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item::before,
-.card .card-body .todo-wrapper .todo .completed .item::before {
+.card .card-body .todo-wrapper .todo .todo-items::before,
+.card .card-body .todo-wrapper .todo .completed::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -226,20 +223,20 @@ body > * {
   background-color: var(--Very-Dark-Grayish-Blue);
   opacity: 0.5;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .task,
-.card .card-body .todo-wrapper .todo .completed .item .task {
+.card .card-body .todo-wrapper .todo .todo-items .task,
+.card .card-body .todo-wrapper .todo .completed .task {
   color: var(--Light-Grayish-Blue);
   font-size: 1rem;
   transition: color 0.4s ease;
   cursor: pointer;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .line-through,
-.card .card-body .todo-wrapper .todo .completed .item .line-through {
+.card .card-body .todo-wrapper .todo .todo-items .line-through,
+.card .card-body .todo-wrapper .todo .completed .line-through {
   text-decoration: line-through;
   color: var(--Very-Dark-Grayish-Blue);
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .button,
-.card .card-body .todo-wrapper .todo .completed .item .button {
+.card .card-body .todo-wrapper .todo .todo-items .button,
+.card .card-body .todo-wrapper .todo .completed .button {
   aspect-ratio: 1;
   display: flex;
   align-items: center;
@@ -255,35 +252,43 @@ body > * {
   border: 0.0625rem solid var(--Dark-Grayish-Blue);
   border-radius: 100%;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .button:hover,
-.card .card-body .todo-wrapper .todo .completed .item .button:hover {
-  border: 0.0625rem solid var(--Check-Background);
-}
-.card .card-body .todo-wrapper .todo .todo-items .item .button .check,
-.card .card-body .todo-wrapper .todo .completed .item .button .check {
+.card .card-body .todo-wrapper .todo .todo-items .button .check,
+.card .card-body .todo-wrapper .todo .completed .button .check {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.4s ease;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .button .show-check,
-.card .card-body .todo-wrapper .todo .completed .item .button .show-check {
+.card .card-body .todo-wrapper .todo .todo-items .button .show-check,
+.card .card-body .todo-wrapper .todo .completed .button .show-check {
   visibility: visible;
   opacity: 1;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .bg,
-.card .card-body .todo-wrapper .todo .completed .item .bg {
+.card .card-body .todo-wrapper .todo .todo-items .bg,
+.card .card-body .todo-wrapper .todo .completed .bg {
   background: var(--Check-Background);
   opacity: unset;
   border: none;
 }
-.card .card-body .todo-wrapper .todo .todo-items .item .mark,
-.card .card-body .todo-wrapper .todo .completed .item .mark {
+.card .card-body .todo-wrapper .todo .todo-items .mark,
+.card .card-body .todo-wrapper .todo .completed .mark {
   margin-left: auto;
   cursor: pointer;
 }
 .card .card-body .todo-wrapper .todo .todo-items:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease;
+}
+.card .card-body .todo-wrapper .todo .todo-items.completed {
+  transform: none;
+}
+.card .card-body .todo-wrapper .todo .completed > .button .check {
+  opacity: 1;
+  visibility: visible;
+}
+.card .card-body .todo-wrapper .todo .completed .button {
+  background: var(--Check-Background);
+  opacity: unset;
+  border: none;
 }
 .card .card-body .todo-wrapper .todo .removeItem.todo-items {
   display: none;
@@ -349,10 +354,10 @@ body > * {
   align-items: center;
   flex-direction: column;
   flex-direction: row;
-  gap: 0.9375em;
   font-weight: 700;
 }
 .card .card-body .todo-wrapper .todo-footer .todo-track ul li {
+  margin: 0 0.9375em;
   list-style: none;
 }
 .card .card-body .todo-wrapper .todo-footer .todo-track ul li a {
