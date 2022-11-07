@@ -12,6 +12,7 @@ body {
 	font-family: "Josefin Sans", sans-serif;
 	@include u.flex;
 	min-height: 100vh;
+	scroll-behavior: smooth;
 	background-color: var(--Very-Dark-Blue);
 	&::-webkit-scrollbar {
 		background: var(--Light-Grayish-Blue);

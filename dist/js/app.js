@@ -10,10 +10,10 @@ const trackProgress = Array.from(document.querySelectorAll(".progress"));
 // const todoText = input;
 
 //Get Themes and todos from local storage
-window.addEventListener("DOMContentLoaded", () => {
-	getTodos();
-	// getBanner();
-});
+// window.addEventListener("DOMContentLoaded", () => {
+// 	getTodos();
+// 	// getBanner();
+// });
 
 // // //theme switcher
 // toggle.addEventListener("click", () => {
@@ -61,9 +61,9 @@ window.addEventListener("DOMContentLoaded", () => {
 // 	}
 // }
 
-// // todos
+//track todos left
 let completed = [];
-const ongoing = [];
+let ongoing = [];
 
 // add the active color to each element recieving the click;
 trackProgress.forEach((track, index) => {
@@ -105,12 +105,16 @@ input.addEventListener("keydown", (e) => {
 		removeTodo.src = "./images/icon-cross.svg";
 		todos.appendChild(removeTodo);
 		todoContainer.appendChild(todos);
-		saveLocalStorage(todos);
-
-		// make elements iterable and set an index foreach todo
 		Array.from(todoContainer.children).forEach((todo, index) => {
 			todo.setAttribute("data-index", index);
 		});
+
+		//track and saveTodos to locaStorage
+		saveLocalStorage(
+			itemPara.textContent,
+			todos.className,
+			todos.dataset.index
+		);
 
 		// track number of  tasks
 		ongoing.push(todos);
@@ -123,10 +127,12 @@ input.addEventListener("keydown", (e) => {
 				e.stopImmediatePropagation();
 				if (e.target.classList.contains("todo-items")) {
 					addChecked(index);
-					saveLocalStorage(todos);
+					let className = e.target.classList.value;
+					updateLocalStorage(index, className);
 				} else {
-					saveLocalStorage(todos);
-					removeCheck();
+					removeCheck(index);
+					let className = e.target.classList.value;
+					updateLocalStorage(index, className);
 				}
 				updateCounter();
 			});
@@ -135,49 +141,123 @@ input.addEventListener("keydown", (e) => {
 		function addChecked(index) {
 			todos.classList.add("completed");
 			todos.classList.remove("todo-items");
-			imageCheck.classList.add("show-check");
-			btnCheck.classList.add("bg");
 			completed.push(todoContainer.children[index]);
+			ongoing.splice(todoContainer.children[index], 1);
 		}
 		function removeCheck(index) {
-			completed.splice(todoContainer.children[index], 1);
 			todos.classList.remove("completed");
 			todos.classList.add("todo-items");
-			btnCheck.classList.remove("bg");
-			todos.classList.remove("completed");
-			imageCheck.classList.remove("show-check");
+			ongoing.push(todoContainer.children[index]);
+			completed.splice(todoContainer.children[index], 1);
 		}
-		//forEach because there are to clearAll both mobile and desktop;
+
+		// updates the context in localStorage when user toggles completed
+		function updateLocalStorage(index, className) {
+			if (JSON.parse(localStorage.getItem("classnames")) === null) {
+				saveLocalStorage(
+					itemPara.textContent,
+					todos.className,
+					todos.dataset.index
+				);
+			} else {
+				let update = JSON.parse(localStorage.getItem("classnames"));
+				update[index] = className;
+				localStorage.setItem("classnames", JSON.stringify(update));
+			}
+		}
+
+		//forEach ___there are two clearAll both mobile and desktop;
 		clearAll.forEach((clear) => {
 			clear.addEventListener("click", (e) => {
+				e.stopImmediatePropagation();
 				let GetChildren = [...todoContainer.children];
-				GetChildren.forEach((child) => {
+
+				GetChildren.forEach((child, index) => {
 					if (child.classList.contains("completed")) {
-						child.remove();
-						completed = [];
-						updateCounter();
+						child.classList.add("remove");
+						let todoClass = child.className;
+						let todoIndex = child.dataset.index;
+						let todoText = child.textContent;
+
+						child.addEventListener("animationend", () => {
+							child.classList.remove("remove");
+						});
+						setTimeout(() => {
+							child.remove();
+							removeCompletedStorage(todoText, index, todoIndex, todoClass);
+							completed.splice(child, 1);
+							ongoing.splice(GetChildren[index], 1);
+							updateCounter();
+						}, 0);
 					}
 				});
 			});
 		});
+		// function removeCompletedStorage(todo, classname, index) {
+		function removeCompletedStorage(todo, index, Tindex, classname) {
+			let todos = JSON.parse(localStorage.getItem("todos"));
+			let classnames = JSON.parse(localStorage.getItem("classnames"));
+			let tindex = JSON.parse(localStorage.getItem("Tindex"));
+
+			todos.splice(todo[index], 1);
+			classnames.splice(classname[index], 1);
+			tindex.splice(Tindex[index], 1);
+
+			localStorage.setItem("todos", JSON.stringify(todos));
+			localStorage.setItem("classnames", JSON.stringify(classnames));
+			localStorage.setItem("Tindex", JSON.stringify(tindex));
+		}
 
 		//remove todo
-		removeTodo.addEventListener("click", () => {
-			removeTodo.parentElement.remove();
+		let close = document.querySelectorAll(".mark");
+		close.forEach((closeBtn, index) => {
+			closeBtn.addEventListener("click", (e) => {
+				e.stopImmediatePropagation();
+				let currentIndex = index;
+				let currentClass = closeBtn.parentElement.className;
+				let currentTodo = closeBtn.parentElement.textContent;
+
+				//remove todo from localStorage;
+				removeStoredTodo(currentTodo, currentClass, currentIndex);
+
+				closeBtn.parentElement.style.animationPlayState = "running";
+				closeBtn.parentElement.remove();
+				completed.splice(todoContainer.children[index], 1); //incase it is checked before removed
+				ongoing.splice(todoContainer.children[index], 1);
+				updateCounter();
+			});
 		});
+
+		// updates the content in localStorage when user toggles completed or clearAll
+		function removeStoredTodo(todo, classname, index) {
+			let todos = JSON.parse(localStorage.getItem("todos"));
+			let classnames = JSON.parse(localStorage.getItem("classnames"));
+			let tindex = JSON.parse(localStorage.getItem("Tindex"));
+
+			todos.splice(todo[index], 1);
+			classnames.splice(classname[index], 1);
+			tindex.splice(index[index], 1);
+
+			localStorage.setItem("todos", JSON.stringify(todos));
+			localStorage.setItem("classnames", JSON.stringify(classnames));
+			localStorage.setItem("Tindex", JSON.stringify(tindex));
+		}
 
 		trackProgress.forEach((filter) => {
 			filter.addEventListener("click", (e) => {
-				if (e.target.classList.contains("active")) {
-					todos.classList.add("show-active");
-					todos.classList.remove("removeItem");
-				} else if (e.target.classList.contains("complete")) {
-					todos.classList.add("removeItem");
-					todos.classList.remove("show-active");
-				} else {
-					todos.classList.remove("removeItem");
-					todos.classList.remove("show-active");
-				}
+				e.stopImmediatePropagation();
+				Array.from(todoContainer.children).forEach((todo) => {
+					if (e.target.classList.contains("active")) {
+						todo.parentElement.classList.add("show-active");
+						todo.parentElement.classList.remove("removeItem");
+					} else if (e.target.classList.contains("complete")) {
+						todo.parentElement.classList.add("removeItem");
+						todo.parentElement.classList.remove("show-active");
+					} else {
+						todo.parentElement.classList.remove("removeItem");
+						todo.parentElement.classList.remove("show-active");
+					}
+				});
 			});
 		});
 
@@ -246,126 +326,41 @@ function updateCounter() {
 }
 
 //store to localStorage;
-
-function saveLocalStorage(todo) {
+function saveLocalStorage(todo, classname, indexes) {
 	let todos;
-	if (localStorage.getItem("todos") === null) {
+	let classnames;
+	let Tindex;
+	if (
+		localStorage.getItem("todos") === null &&
+		localStorage.getItem("classnames") === null &&
+		localStorage.getItem("Tindex") === null
+	) {
 		todos = [];
+		classnames = [];
+		Tindex = [];
 	} else {
 		todos = JSON.parse(localStorage.getItem("todos"));
+		classnames = JSON.parse(localStorage.getItem("classnames"));
+		Tindex = JSON.parse(localStorage.getItem("Tindex"));
 	}
-	todos.push(
-		(allTodos = {
-			text: todo.textContent,
-			className: todo.className,
-		})
-	);
+	todos.push(todo);
+	classnames.push(classname);
+	Tindex.push(indexes);
+
 	localStorage.setItem("todos", JSON.stringify(todos));
+	localStorage.setItem("classnames", JSON.stringify(classnames));
+	localStorage.setItem("Tindex", JSON.stringify(Tindex));
 }
 
-function getTodos() {
-	let todos;
-	if (localStorage.getItem("todos") === null) {
-		todos = [];
-	} else {
-		todos = JSON.parse(localStorage.getItem("todos"));
-	}
-	todos.forEach((todo) => {
-		const todos = document.createElement("div");
-		todos.className = todo.className;
-
-		const btnCheck = document.createElement("div");
-		btnCheck.className = "button";
-		todos.appendChild(btnCheck);
-		//checkImg/mark
-		const imageCheck = document.createElement("img");
-		imageCheck.className = "check";
-		imageCheck.src = "./images/icon-check.svg";
-		imageCheck.setAttribute("aria-label", "hidden");
-		btnCheck.appendChild(imageCheck);
-
-		const itemPara = document.createElement("p");
-		itemPara.className = "task";
-		itemPara.textContent = todo.text;
-		todos.appendChild(itemPara);
-
-		//remove todo btn
-		const removeTodo = document.createElement("img");
-		removeTodo.className = "mark";
-		removeTodo.src = "./images/icon-cross.svg";
-		todos.appendChild(removeTodo);
-		todoContainer.appendChild(todos);
-
-		Array.from(todoContainer.children).forEach((todo, index) => {
-			todo.setAttribute("data-index", index);
-		});
-
-		// track number of  tasks
-		ongoing.push(todos);
-		updateCounter();
-
-		//toggle checked/
-		let allTodos = [...todoContainer.children];
-		allTodos.forEach((todo, index) => {
-			todo.addEventListener("click", (e) => {
-				e.stopImmediatePropagation();
-				if (e.target.classList.contains("todo-items")) {
-					addChecked(index);
-				} else {
-					removeCheck();
-				}
-				updateCounter();
-			});
-		});
-
-		function addChecked(index) {
-			todos.classList.add("completed");
-			todos.classList.remove("todo-items");
-			imageCheck.classList.add("show-check");
-			btnCheck.classList.add("bg");
-			completed.push(todoContainer.children[index]);
-		}
-		function removeCheck(index) {
-			completed.splice(todoContainer.children[index], 1);
-			todos.classList.remove("completed");
-			todos.classList.add("todo-items");
-			btnCheck.classList.remove("bg");
-			todos.classList.remove("completed");
-			imageCheck.classList.remove("show-check");
-		}
-		//forEach because there are to clearAll both mobile and desktop;
-		clearAll.forEach((clear) => {
-			clear.addEventListener("click", (e) => {
-				let GetChildren = [...todoContainer.children];
-				GetChildren.forEach((child) => {
-					if (child.classList.contains("completed")) {
-						child.remove();
-						completed = [];
-						updateCounter();
-					}
-				});
-			});
-		});
-		removeTodo.addEventListener("click", () => {
-			removeTodo.parentElement.remove();
-		});
-
-		trackProgress.forEach((filter) => {
-			filter.addEventListener("click", (e) => {
-				if (e.target.classList.contains("active")) {
-					todos.classList.add("show-active");
-					todos.classList.remove("removeItem");
-				} else if (e.target.classList.contains("complete")) {
-					todos.classList.add("removeItem");
-					todos.classList.remove("show-active");
-				} else {
-					todos.classList.remove("removeItem");
-					todos.classList.remove("show-active");
-				}
-			});
-		});
-	});
-}
+// function getTodos() {
+// 	let todos;
+// 	if (localStorage.getItem("todos") === null) {
+// 		todos = [];
+// 	} else {
+// 		todos = JSON.parse(localStorage.getItem("todos"));
+// 	}
+// 	todos.forEach((todo, index) => {});
+// }
 
 // // ===============Themes==================
 // function getBanner() {

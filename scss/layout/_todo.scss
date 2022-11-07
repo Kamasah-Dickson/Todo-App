@@ -176,12 +176,16 @@
 						transition: transform 0.3s ease;
 					}
 				}
+
 				.todo-items.completed {
 					transform: none;
-					// 		todos.classList.add("completed");
-					// todos.classList.remove("todo-items");
-					// imageCheck.classList.add("show-check");
-					// btnCheck.classList.add("bg");
+				}
+
+				.remove.todo-items {
+					@include u.trans(remove, 0.2s);
+				}
+				.remove.completed {
+					@include u.trans(remove, 0.2s);
 				}
 
 				.completed > .button .check {
@@ -193,16 +197,16 @@
 					opacity: unset;
 					border: none;
 				}
-				.removeItem.todo-items {
-					display: none;
-				}
-				.show-active.completed {
-					display: none;
-				}
-				// .todo-items{
-
-				// }
 			}
+			// show all,active or completed todo
+			.show-active .completed {
+				display: none;
+			}
+
+			.removeItem .todo-items {
+				display: none;
+			}
+			//////////////////////////////
 			.mobile-component {
 				box-shadow: u.rem(0) u.rem(10) u.rem(10) u.rem(-5)
 					var(--Very-Dark-Blue2);
@@ -313,14 +317,4 @@
 			}
 		}
 	}
-}
-
-.alert-user {
-	background-color: rgba(17, 57, 235, 0.575);
-	color: var(--Very-Light-Gray);
-	text-align: center;
-	position: absolute;
-	top: 0;
-	left: 0;
-	max-width: u.rem(200);
 }

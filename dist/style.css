@@ -1,3 +1,23 @@
+@-webkit-keyframes remove {
+  0% {
+    opacity: 1;
+    height: 100%;
+  }
+  100% {
+    padding: 0;
+    opacity: 0;
+  }
+}
+@keyframes remove {
+  0% {
+    opacity: 1;
+    height: 100%;
+  }
+  100% {
+    padding: 0;
+    opacity: 0;
+  }
+}
 :root {
   --Check-Background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   --Bright-Blue: hsl(235, 21%, 11%);
@@ -36,6 +56,7 @@ body {
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  scroll-behavior: smooth;
   background-color: var(--Very-Dark-Blue);
 }
 body::-webkit-scrollbar {
@@ -281,6 +302,18 @@ body > * {
 .card .card-body .todo-wrapper .todo .todo-items.completed {
   transform: none;
 }
+.card .card-body .todo-wrapper .todo .remove.todo-items {
+  -webkit-animation: remove 0.2s ease-in;
+          animation: remove 0.2s ease-in;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.card .card-body .todo-wrapper .todo .remove.completed {
+  -webkit-animation: remove 0.2s ease-in;
+          animation: remove 0.2s ease-in;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
 .card .card-body .todo-wrapper .todo .completed > .button .check {
   opacity: 1;
   visibility: visible;
@@ -290,10 +323,10 @@ body > * {
   opacity: unset;
   border: none;
 }
-.card .card-body .todo-wrapper .todo .removeItem.todo-items {
+.card .card-body .todo-wrapper .show-active .completed {
   display: none;
 }
-.card .card-body .todo-wrapper .todo .show-active.completed {
+.card .card-body .todo-wrapper .removeItem .todo-items {
   display: none;
 }
 .card .card-body .todo-wrapper .mobile-component {
@@ -412,14 +445,4 @@ body > * {
 .card .card-body .todo-wrapper .todo-footer .in-common3 {
     display: block;
   }
-}
-
-.alert-user {
-  background-color: rgba(17, 57, 235, 0.575);
-  color: var(--Very-Light-Gray);
-  text-align: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 12.5rem;
 }/*# sourceMappingURL=style.css.map */
