@@ -83,6 +83,7 @@ input.addEventListener("keydown", (e) => {
 	if (e.key === "Enter") {
 		const todos = document.createElement("div");
 		todos.className = "todo-items";
+		todos.classList.add("draggable");
 
 		const btnCheck = document.createElement("div");
 		btnCheck.className = "button";
@@ -151,21 +152,6 @@ input.addEventListener("keydown", (e) => {
 			completed.splice(todoContainer.children[index], 1);
 		}
 
-		// updates the context in localStorage when user toggles completed
-		function updateLocalStorage(index, className) {
-			if (JSON.parse(localStorage.getItem("classnames")) === null) {
-				saveLocalStorage(
-					itemPara.textContent,
-					todos.className,
-					todos.dataset.index
-				);
-			} else {
-				let update = JSON.parse(localStorage.getItem("classnames"));
-				update[index] = className;
-				localStorage.setItem("classnames", JSON.stringify(update));
-			}
-		}
-
 		//forEach ___there are two clearAll both mobile and desktop;
 		clearAll.forEach((clear) => {
 			clear.addEventListener("click", (e) => {
@@ -193,20 +179,6 @@ input.addEventListener("keydown", (e) => {
 				});
 			});
 		});
-		// function removeCompletedStorage(todo, classname, index) {
-		function removeCompletedStorage(todo, index, Tindex, classname) {
-			let todos = JSON.parse(localStorage.getItem("todos"));
-			let classnames = JSON.parse(localStorage.getItem("classnames"));
-			let tindex = JSON.parse(localStorage.getItem("Tindex"));
-
-			todos.splice(todo[index], 1);
-			classnames.splice(classname[index], 1);
-			tindex.splice(Tindex[index], 1);
-
-			localStorage.setItem("todos", JSON.stringify(todos));
-			localStorage.setItem("classnames", JSON.stringify(classnames));
-			localStorage.setItem("Tindex", JSON.stringify(tindex));
-		}
 
 		//remove todo
 		let close = document.querySelectorAll(".mark");
@@ -228,21 +200,6 @@ input.addEventListener("keydown", (e) => {
 			});
 		});
 
-		// updates the content in localStorage when user toggles completed or clearAll
-		function removeStoredTodo(todo, classname, index) {
-			let todos = JSON.parse(localStorage.getItem("todos"));
-			let classnames = JSON.parse(localStorage.getItem("classnames"));
-			let tindex = JSON.parse(localStorage.getItem("Tindex"));
-
-			todos.splice(todo[index], 1);
-			classnames.splice(classname[index], 1);
-			tindex.splice(index[index], 1);
-
-			localStorage.setItem("todos", JSON.stringify(todos));
-			localStorage.setItem("classnames", JSON.stringify(classnames));
-			localStorage.setItem("Tindex", JSON.stringify(tindex));
-		}
-
 		trackProgress.forEach((filter) => {
 			filter.addEventListener("click", (e) => {
 				e.stopImmediatePropagation();
@@ -260,63 +217,124 @@ input.addEventListener("keydown", (e) => {
 				});
 			});
 		});
-
-		//draggable
-		// let dragstartIndex;
-		// items.setAttribute("draggable", "true");
-		// items.addEventListener("dragstart", dragendVal);
-		// todoInner.forEach((item, index) => {
-		// 	item.setAttribute("data-index", index);
-		// });
-		// function dragendVal() {
-		// 	setTimeout(function () {
-		// 		setTimeout(() => {
-		// 			items.style.opacity = 0.3;
-		// 		}, 0);
-		// 		// items.style.op;
-		// 	}, 0);
-		// 	dragstartIndex = +items.getAttribute("data-index");
-		// 	return dragstartIndex;
-		// }
-
-		// items.addEventListener("dragend", () => {
-		// 	items.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
-		// 	setTimeout(() => {
-		// 		items.style.opacity = 1;
-		// 	}, 0);
-		// });
-
-		// items.addEventListener("dragenter", () => {
-		// 	items.classList.add("over");
-		// 	items.style.backgroundColor = "rgba(0,0,0,0.2)";
-		// });
-
-		// items.addEventListener("dragleave", () => {
-		// 	items.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
-		// });
-		// items.addEventListener("drop", () => {
-		// 	const dragEndIndex = +items.getAttribute("data-index");
-		// 	items.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
-		// 	// swapItems(dragendVal(), dragEndIndex);
-		// });
-
-		// todos.addEventListener("dragover", (e) => {
-		// 	e.preventDefault();
-		// });
-
-		// function swapItems(dragstartIndex, dragEndIndex) {
-		// 	const itemOne =
-		// 		todoContainer.children[dragstartIndex].previousElementSibling;
-		// 	const itemTwo = todoContainer.children[dragEndIndex];
-
-		// 	// todoContainer.children[dragstartIndex].appendChild(itemTwo);
-		// 	// todoContainer.children[dragEndIndex].appendChild(itemOne);
-		// 	// console.log(itemOne, itemTwo);
-		// }
 		input.value = "";
+
+		//==================draggable======================
+
+		Array.from(todoContainer.children).forEach((todo, index) => {
+			todo.setAttribute("draggable", "true");
+			todo.addEventListener("dragstart", () => {
+				//apply a class to the current dragging
+				todo.classList.add("dragging");
+			});
+			todo.addEventListener("dragend", (e) => {
+				e.stopImmediatePropagation();
+				todo.classList.remove("dragging");
+
+				todo.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
+			});
+
+			let activeTodo;
+			todo.addEventListener("dragenter", () => {
+				todo.style.backgroundColor = "rgba(0,0,0,0.2)";
+				activeTodo = todo;
+			});
+
+			todo.addEventListener("dragleave", () => {
+				todo.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
+			});
+
+			todo.addEventListener("drop", (e) => {
+				e.stopImmediatePropagation();
+				todo.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
+				const afterElement = getDragAfterElement(todoContainer, e.clientY);
+				let draggable = document.querySelector(".dragging");
+				if (afterElement == null) {
+					todoContainer.appendChild(draggable);
+				} else {
+					todoContainer.insertBefore(draggable, afterElement);
+				}
+			});
+
+			todoContainer.addEventListener("dragenter", (e) => {
+				e.preventDefault();
+			});
+
+			todoContainer.addEventListener("dragover", (e) => {
+				e.preventDefault();
+			});
+
+			function getDragAfterElement(todoContainer, y) {
+				let draggableElements = [
+					...todoContainer.querySelectorAll(".draggable:not(.dragging)"),
+				];
+
+				return draggableElements.reduce(
+					(closest, child) => {
+						const box = child.getBoundingClientRect();
+						//determine the middle of dragover todo====y:mouse position
+						const offset = y - box.top - box.height / 2;
+						if (offset < 0 && offset > closest.offset) {
+							return { offset: offset, element: child };
+						} else {
+							return closest;
+						}
+					},
+					{ offset: Number.NEGATIVE_INFINITY }
+				).element;
+			}
+		});
 	}
 });
 
+// =========================functions============================
+
+// function removeCompletedStorage(todo, classname, index) {
+function removeCompletedStorage(todo, index, Tindex, classname) {
+	let todos = JSON.parse(localStorage.getItem("todos"));
+	let classnames = JSON.parse(localStorage.getItem("classnames"));
+	let tindex = JSON.parse(localStorage.getItem("Tindex"));
+
+	todos.splice(todo[index], 1);
+	classnames.splice(classname[index], 1);
+	tindex.splice(Tindex[index], 1);
+
+	localStorage.setItem("todos", JSON.stringify(todos));
+	localStorage.setItem("classnames", JSON.stringify(classnames));
+	localStorage.setItem("Tindex", JSON.stringify(tindex));
+}
+
+// updates the context in localStorage when user toggles completed
+function updateLocalStorage(index, className) {
+	if (JSON.parse(localStorage.getItem("classnames")) === null) {
+		saveLocalStorage(
+			itemPara.textContent,
+			todos.className,
+			todos.dataset.index
+		);
+	} else {
+		let update = JSON.parse(localStorage.getItem("classnames"));
+		update[index] = className;
+		localStorage.setItem("classnames", JSON.stringify(update));
+	}
+}
+
+// updates the content in localStorage when user toggles completed or clearAll
+function removeStoredTodo(todo, classname, index) {
+	let todos = JSON.parse(localStorage.getItem("todos"));
+	let classnames = JSON.parse(localStorage.getItem("classnames"));
+	let tindex = JSON.parse(localStorage.getItem("Tindex"));
+
+	todos.splice(todo[index], 1);
+	classnames.splice(classname[index], 1);
+	tindex.splice(index[index], 1);
+
+	localStorage.setItem("todos", JSON.stringify(todos));
+	localStorage.setItem("classnames", JSON.stringify(classnames));
+	localStorage.setItem("Tindex", JSON.stringify(tindex));
+}
+
+//calculte the number of todos left
 function updateCounter() {
 	remaining.forEach((item) => {
 		item.textContent = `${
@@ -325,6 +343,7 @@ function updateCounter() {
 	});
 }
 
+// ==========================// function-end================================
 //store to localStorage;
 function saveLocalStorage(todo, classname, indexes) {
 	let todos;

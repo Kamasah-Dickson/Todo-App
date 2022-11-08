@@ -222,7 +222,8 @@ body > * {
 }
 .card .card-body .todo-wrapper .todo .todo-items,
 .card .card-body .todo-wrapper .todo .completed {
-  cursor: pointer;
+  cursor: -webkit-grab;
+  cursor: grab;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -255,6 +256,11 @@ body > * {
 .card .card-body .todo-wrapper .todo .completed .line-through {
   text-decoration: line-through;
   color: var(--Very-Dark-Grayish-Blue);
+}
+.card .card-body .todo-wrapper .todo .todo-items .grabbing,
+.card .card-body .todo-wrapper .todo .completed .grabbing {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
 }
 .card .card-body .todo-wrapper .todo .todo-items .button,
 .card .card-body .todo-wrapper .todo .completed .button {

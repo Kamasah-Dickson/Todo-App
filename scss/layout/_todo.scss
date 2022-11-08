@@ -107,7 +107,9 @@
 				}
 				.todo-items,
 				.completed {
-					cursor: pointer;
+					cursor: -moz-grab;
+					cursor: -webkit-grab;
+					cursor: grab;
 					@include u.flex;
 					flex-direction: row;
 					justify-content: space-between;
@@ -135,6 +137,11 @@
 					.line-through {
 						text-decoration: line-through;
 						color: var(--Very-Dark-Grayish-Blue);
+					}
+					.grabbing {
+						cursor: grabbing;
+						cursor: -moz-grabbing;
+						cursor: -webkit-grabbing;
 					}
 					.button {
 						aspect-ratio: 1;
