@@ -462,10 +462,10 @@ footer a {
   color: var(--Bright-Blue);
 }
 
-.me {
+footer .me {
   display: none;
   position: absolute;
-  bottom: 4.375rem;
+  bottom: 6.25rem;
   right: 2.5rem;
   width: 3.125rem;
   height: 3.125rem;
@@ -473,11 +473,11 @@ footer a {
   box-shadow: 1px 1px 0.125rem -0.125rem var(--Light-Grayish-Blue);
 }
 @media (min-width: 48rem) {
-  .me {
+  footer .me {
     display: block;
   }
 }
-.me:hover {
+footer .me:hover {
   transform: scale(1.2);
   transition: transform 0.4s ease-in-out;
   cursor: pointer;
