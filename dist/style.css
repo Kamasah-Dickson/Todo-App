@@ -252,11 +252,6 @@ body > * {
   transition: color 0.4s ease;
   cursor: pointer;
 }
-.card .card-body .todo-wrapper .todo .todo-items .line-through,
-.card .card-body .todo-wrapper .todo .completed .line-through {
-  text-decoration: line-through;
-  color: var(--Very-Dark-Grayish-Blue);
-}
 .card .card-body .todo-wrapper .todo .todo-items .grabbing,
 .card .card-body .todo-wrapper .todo .completed .grabbing {
   cursor: grabbing;
@@ -323,6 +318,10 @@ body > * {
 .card .card-body .todo-wrapper .todo .completed > .button .check {
   opacity: 1;
   visibility: visible;
+}
+.card .card-body .todo-wrapper .todo .completed > .task {
+  text-decoration: line-through;
+  color: var(--Very-Dark-Grayish-Blue);
 }
 .card .card-body .todo-wrapper .todo .completed .button {
   background: var(--Check-Background);

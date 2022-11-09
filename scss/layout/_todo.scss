@@ -128,16 +128,14 @@
 						background-color: var(--Very-Dark-Grayish-Blue);
 						opacity: 0.5;
 					}
+
 					.task {
 						color: var(--Light-Grayish-Blue);
 						font-size: u.rem(16);
 						transition: color 0.4s ease;
 						cursor: pointer;
 					}
-					.line-through {
-						text-decoration: line-through;
-						color: var(--Very-Dark-Grayish-Blue);
-					}
+
 					.grabbing {
 						cursor: grabbing;
 						cursor: -moz-grabbing;
@@ -198,6 +196,10 @@
 				.completed > .button .check {
 					opacity: 1;
 					visibility: visible;
+				}
+				.completed > .task {
+					text-decoration: line-through;
+					color: var(--Very-Dark-Grayish-Blue);
 				}
 				.completed .button {
 					background: var(--Check-Background);
