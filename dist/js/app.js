@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	getBanner();
 });
 
-// //theme switcher
+//theme switcher
 toggle.addEventListener("click", () => {
 	if (document.body.classList.contains("dark-theme")) {
 		lightTheme();
@@ -213,7 +213,7 @@ input.addEventListener("keydown", (e) => {
 
 		//==================draggable======================
 		Array.from(todoContainer.children).forEach((todo) => {
-			// todos.classList.add("draggable");
+			todos.classList.add("draggable");
 			todo.setAttribute("draggable", "true");
 			todo.addEventListener("dragstart", () => {
 				todo.classList.add("dragging");
@@ -225,10 +225,8 @@ input.addEventListener("keydown", (e) => {
 				todo.style.backgroundColor = "var(--Very-Dark-Desaturated-Blue)";
 			});
 
-			let activeTodo;
 			todo.addEventListener("dragenter", () => {
 				todo.style.backgroundColor = "rgba(0,0,0,0.2)";
-				activeTodo = todo;
 			});
 
 			todo.addEventListener("dragleave", () => {
@@ -563,16 +561,6 @@ function getTodosFromLocalStoage() {
 		});
 	});
 }
-
-// function getTodos() {
-// 	let todos;
-// 	if (localStorage.getItem("todos") === null) {
-// 		todos = [];
-// 	} else {
-// 		todos = JSON.parse(localStorage.getItem("todos"));
-// 	}
-// 	todos.forEach((todo, index) => {});
-// }
 
 // ===============Themes==================
 function getBanner() {

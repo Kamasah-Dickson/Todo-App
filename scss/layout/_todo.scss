@@ -11,7 +11,7 @@
 	}
 }
 .card {
-	width: min(100% - u.rem(50), u.rem(580));
+	width: min(100% - u.rem(50), u.rem(550));
 	margin-inline: auto;
 	margin-top: u.rem(-160);
 	position: relative;
@@ -54,7 +54,7 @@
 					color: var(--Bright-Blue);
 					font-weight: 400;
 					font-size: u.rem(16);
-					height: u.rem(50);
+					height: u.rem(60);
 					border: none;
 					border-radius: u.rem(5);
 					padding-left: u.rem(50);
@@ -86,7 +86,7 @@
 			box-shadow: none;
 
 			.todo {
-				max-height: u.rem(250);
+				max-height: u.rem(300);
 				background-color: var(--Very-Dark-Desaturated-Blue);
 				overflow: hidden;
 				overflow-y: scroll;
