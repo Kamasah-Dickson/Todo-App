@@ -50,6 +50,7 @@
 }
 
 body {
+  position: relative;
   font-size: 18px;
   font-family: "Josefin Sans", sans-serif;
   display: flex;
@@ -112,7 +113,7 @@ body > * {
 }
 
 .card {
-  width: min(100% - 3.125rem, 34.375rem);
+  width: min(100% - 3.125rem, 35.625rem);
   margin-inline: auto;
   margin-top: -10rem;
   position: relative;
@@ -201,7 +202,7 @@ body > * {
   box-shadow: none;
 }
 .card .card-body .todo-wrapper .todo {
-  max-height: 18.75rem;
+  max-height: 21.875rem;
   background-color: var(--Very-Dark-Desaturated-Blue);
   overflow: hidden;
   overflow-y: scroll;
@@ -450,4 +451,34 @@ body > * {
 .card .card-body .todo-wrapper .todo-footer .in-common3 {
     display: block;
   }
+}
+
+footer {
+  margin-top: 2.5rem;
+  font-size: 0.9375rem;
+  color: var(--Light-Grayish-Blue);
+}
+footer a {
+  color: var(--Bright-Blue);
+}
+
+.me {
+  display: none;
+  position: absolute;
+  bottom: 4.375rem;
+  right: 2.5rem;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 100%;
+  box-shadow: 1px 1px 0.125rem -0.125rem var(--Light-Grayish-Blue);
+}
+@media (min-width: 48rem) {
+  .me {
+    display: block;
+  }
+}
+.me:hover {
+  transform: scale(1.2);
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

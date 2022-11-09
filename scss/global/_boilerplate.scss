@@ -8,6 +8,7 @@
 	box-sizing: border-box;
 }
 body {
+	position: relative;
 	font-size: 18px;
 	font-family: "Josefin Sans", sans-serif;
 	@include u.flex;
