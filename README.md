@@ -40,8 +40,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Kamasah-Dickson/Todo-App)
-- Live Site URL: [Add live site URL here](https://kamasah-dickson.github.io/Todo-App/)
+- Solution URL: [Solution](https://github.com/Kamasah-Dickson/Todo-App)
+- Live Site URL: [live site URL here](https://kamasah-dickson.github.io/Todo-App/)
 
 ## My process
 
