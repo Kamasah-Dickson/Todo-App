@@ -457,6 +457,7 @@ footer {
   margin-top: 2.5rem;
   font-size: 0.9375rem;
   color: var(--Light-Grayish-Blue);
+  text-align:center;
 }
 footer a {
   color: var(--Bright-Blue);
