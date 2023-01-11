@@ -1,8 +1,7 @@
 # Todo-App
 
-# Frontend Mentor - Todo app  Challenge solution
+- Live Site URL: [live site URL here](https://kamasah-dickson.github.io/Todo-App/)
 
-This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
